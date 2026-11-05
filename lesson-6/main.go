@@ -11,7 +11,7 @@ import (
 
 func main() {
 	target := "/Users/lianghao/PhpStorm/js.dtm.cc"
-	task := fmt.Sprintf("扫描目录%s，并读取目录下的 .txt 文件，读取第一个txt文件的前五行")
+	task := fmt.Sprintf("扫描目录%s，并读取目录下的 .txt 文件，读取第一个txt文件的前五行", target)
 
 	fmt.Println("任务是：", task)
 	fmt.Println()
