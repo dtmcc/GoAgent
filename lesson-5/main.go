@@ -1,7 +1,7 @@
 package main
 
 import (
-	consts "GoAgent"
+	"GoAgent/consts"
 	"context"
 	"errors"
 	"fmt"
