@@ -77,7 +77,7 @@ func runReact(client *openai.Client, question string, maxStep int) error {
 			dispatchRes, err := dispatch(tool.Function.Name, tool.Function.Arguments)
 			fmt.Printf("\n Observation %s", dispatchRes)
 			if err != nil {
-				return errors.New("")
+				return errors.New("error:" + err.Error())
 			}
 			messages = append(messages, openai.ChatCompletionMessage{
 				Role:       openai.ChatMessageRoleTool,
@@ -136,14 +136,9 @@ func dispatch(function string, arguments string) (string, error) {
 			Limit int    `json:"limit"`
 		}
 		_ = json.Unmarshal([]byte(arguments), &p)
-		files, err := scanDir(p.Path)
+		content, err := readFile(p.Path, p.Limit)
 		if err != nil {
-			return "", errors.New("scan_dir 出错")
-		}
-		firstPath := strings.Split(files, "\n")[0]
-		content, err := readFile(firstPath, p.Limit)
-		if err != nil {
-			return "", errors.New("read_file 出错")
+			return "", errors.New("read_file 出错:" + err.Error())
 		}
 		return content, nil
 	case "count_lines":
@@ -153,7 +148,7 @@ func dispatch(function string, arguments string) (string, error) {
 		_ = json.Unmarshal([]byte(arguments), &p)
 		countLines, err := countLines(p.Path)
 		if err != nil {
-			return "", errors.New("count_lines 出错")
+			return "", errors.New("count_lines 出错:" + err.Error())
 		}
 		return fmt.Sprintf("当前文件路径：%s 行数：%d", p.Path, countLines), nil
 	default:
@@ -180,8 +175,11 @@ func countLines(path string) (int, error) {
 	return lines, nil
 }
 
-func readFile(firstPath string, limit int) (string, error) {
-	f, err := os.Open(firstPath)
+func readFile(path string, limit int) (string, error) {
+	if limit <= 0 {
+		limit = 10
+	}
+	f, err := os.Open(path)
 	if err != nil {
 		return "", err
 	}
