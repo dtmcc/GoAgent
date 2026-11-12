@@ -37,7 +37,7 @@ const planterPrompt = `你是一个本机 Go 仓库分析任务的 Planner。把
 `
 
 func main() {
-	goal := "请彻底分析我本机的一个 PHP  项目（路径 /Users/lianghao/PhpStorm/js.dtm.cc ），覆盖技术栈、目录分层、启动链路、API入口、业务链路等 "
+	goal := "请彻底分析我本机的一个 go  项目（路径 ./ ），覆盖技术栈、目录分层、启动链路、API入口、业务链路等 "
 	client := DeepSeek.NewClient()
 	plans, err := makePlan(client, goal)
 	if err != nil {

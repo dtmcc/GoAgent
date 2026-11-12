@@ -9,6 +9,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/joho/godotenv"
 	openai "github.com/sashabaranov/go-openai"
 )
 
@@ -57,6 +58,8 @@ func MultiChat(ctx context.Context) {
 }
 
 func NewCoach() (*Coach, error) {
+	godotenv.Load()
+
 	aipKey := strings.TrimSpace(os.Getenv("DEEPSEEK_API_KEY"))
 	if aipKey == "" {
 		return nil, errors.New("DEEPSEEK_API_KEY is empty")
@@ -134,7 +137,7 @@ func (c *Coach) Ask(ctx context.Context, question string) (string, openai.Usage,
 		return "", openai.Usage{}, err
 	}
 	if len(resp.Choices) == 0 {
-		return "", openai.Usage{}, err
+		return "", openai.Usage{}, nil
 	}
 	return resp.Choices[0].Message.Content, resp.Usage, err
 }

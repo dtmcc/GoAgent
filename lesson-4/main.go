@@ -28,7 +28,7 @@ func main() {
 		panic(err)
 	}
 
-	question := `我有一个项目放在 /Users/lianghao/PhpStorm/js.dtm.cc 目录，希望你帮我梳理
+	question := `我有一个项目放在./ 目录，希望你帮我梳理
 1. 这是什么类型的项目，用了哪些技术栈
 2. 一次Http请求 从入口到数据库 大概经过哪几层
 3. 我现在要接收维护，大概从哪个目录，哪个文件开始阅读？`
@@ -39,7 +39,8 @@ func main() {
 		fmt.Println(err)
 	}
 	fmt.Println(answer1)
-	fmt.Println(" ")
+
+	fmt.Println("====== 强 prompt ======")
 	answer2, err := Chat(client, structuredPrompt, question)
 	if err != nil {
 		fmt.Println(err)
@@ -76,10 +77,10 @@ func Chat(client *openai.Client, prompt, question string) (string, error) {
 		},
 	})
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("调用模型失败: %w", err)
 	}
 	if len(resp.Choices) == 0 {
-		return "", err
+		return "", errors.New("模型未返回任何 choices")
 	}
-	return resp.Choices[0].Message.Content, err
+	return resp.Choices[0].Message.Content, nil
 }

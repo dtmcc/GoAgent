@@ -15,6 +15,7 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
 	question := "go中的channel 如何理解"
 	stream, err := NewChatStream()
 	if err != nil {
@@ -22,7 +23,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	err = stream.StreamAsk(context.Background(), question)
+	err = stream.StreamAsk(ctx, question)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)

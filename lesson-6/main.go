@@ -10,8 +10,8 @@ import (
 )
 
 func main() {
-	target := "/Users/lianghao/PhpStorm/js.dtm.cc"
-	task := fmt.Sprintf("扫描目录%s，并读取目录下的 .txt 文件，读取第一个txt文件的前五行", target)
+	target := "./"
+	task := fmt.Sprintf("扫描目录%s，并读取目录下的 .go 文件，读取第一个go文件的前五行", target)
 
 	fmt.Println("任务是：", task)
 	fmt.Println()
@@ -40,13 +40,13 @@ func agentReply(target string) string {
 		if err != nil || d.IsDir() {
 			return nil
 		}
-		if strings.HasSuffix(d.Name(), ".txt") {
+		if strings.HasSuffix(d.Name(), ".go") {
 			files = append(files, path)
 		}
 		return nil
 	})
 
-	out.WriteString("\n第一步：扫描目录 得到.json文件" + strings.Join(files, "\n"))
+	out.WriteString("\n第一步：扫描目录 得到.go文件" + strings.Join(files, "\n"))
 	if len(files) == 0 {
 		out.WriteString("没有文件")
 		return out.String()
