@@ -45,7 +45,7 @@ func main() {
 			break
 		}
 		if event.Err != nil {
-			log.Fatal(err)
+			log.Fatal(event.Err)
 		}
 		if event.Output == nil || event.Output.MessageOutput == nil {
 			continue
