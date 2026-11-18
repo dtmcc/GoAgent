@@ -66,7 +66,7 @@ func NewCoach() (*Coach, error) {
 	}
 
 	cfg := openai.DefaultConfig(aipKey)
-	cfg.BaseURL = "https://api.deepseek.com/"
+	cfg.BaseURL = consts.DeepSeekBaseURL
 
 	return &Coach{
 		client: openai.NewClientWithConfig(cfg),

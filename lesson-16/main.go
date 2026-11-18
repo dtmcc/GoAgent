@@ -52,7 +52,7 @@ func main() {
 	cm, err := einoai.NewChatModel(ctx, &einoai.ChatModelConfig{
 		APIKey:  strings.TrimSpace(os.Getenv("DEEPSEEK_API_KEY")),
 		Model:   consts.DeepSeekModelFlash,
-		BaseURL: "https://api.deepseek.com/",
+		BaseURL: consts.DeepSeekBaseURL,
 	})
 	if err != nil {
 		log.Fatal(err)

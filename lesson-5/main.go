@@ -44,7 +44,7 @@ func NewChatStream() (*ChatStream, error) {
 	}
 
 	cfg := openai.DefaultConfig(aipKey)
-	cfg.BaseURL = "https://api.deepseek.com/"
+	cfg.BaseURL = consts.DeepSeekBaseURL
 
 	return &ChatStream{
 		client: openai.NewClientWithConfig(cfg),

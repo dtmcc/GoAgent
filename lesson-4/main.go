@@ -57,7 +57,7 @@ func NewClient() (*openai.Client, error) {
 	}
 
 	cfg := openai.DefaultConfig(aipKey)
-	cfg.BaseURL = "https://api.deepseek.com/"
+	cfg.BaseURL = consts.DeepSeekBaseURL
 
 	return openai.NewClientWithConfig(cfg), nil
 }

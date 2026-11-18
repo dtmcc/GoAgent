@@ -1,6 +1,7 @@
 package DeepSeek
 
 import (
+	"GoAgent/consts"
 	"fmt"
 	"os"
 	"strings"
@@ -18,7 +19,7 @@ func NewClient() *openai.Client {
 		return nil
 	}
 	cfg := openai.DefaultConfig(apiKey)
-	cfg.BaseURL = "https://api.deepseek.com/"
+	cfg.BaseURL = consts.DeepSeekBaseURL
 
 	return openai.NewClientWithConfig(cfg)
 }

@@ -27,7 +27,7 @@ func main() {
 	cm, err := einoai.NewChatModel(ctx, &einoai.ChatModelConfig{
 		Model:       consts.DeepSeekModelFlash,
 		APIKey:      strings.TrimSpace(os.Getenv("DEEPSEEK_API_KEY")),
-		BaseURL:     "https://api.deepseek.com/",
+		BaseURL:     consts.DeepSeekBaseURL,
 		Temperature: ptr(float32(0.3)),
 	})
 	if err != nil {
