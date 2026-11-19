@@ -9,7 +9,7 @@ import (
 	"github.com/cloudwego/eino/compose"
 )
 
-func mapField(ctx context.Context) {
+func MapField(ctx context.Context) {
 
 	// 统计字符串长度
 	type Input struct {

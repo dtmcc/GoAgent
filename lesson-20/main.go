@@ -2,9 +2,14 @@ package main
 
 import (
 	"context"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
 	ctx := context.Background()
-	mapField(ctx)
+	godotenv.Load()
+
+	MapField(ctx)
+	WorkFlow(ctx)
 }
